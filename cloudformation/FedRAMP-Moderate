@@ -1,0 +1,30 @@
+---
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'Windows RDP Gateway Service Access'
+Parameters:
+  VpcId:
+    Type: AWS::SSM::Parameter::Value<String>
+    Description: The id of the main account VPC
+    Default: '/shared/vpc-id-default'
+Resources:
+  SecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+        GroupDescription: Allow ingress on 3389 from the RDP Gateway Service Servers
+        VpcId: 12323546
+        SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 3389
+          ToPort: 3389
+          CidrIp: 10.232.12.0/24
+          Description: Allows inbound from aviation-apps-prod RDP Gateway Service Servers
+        - IpProtocol: tcp
+          FromPort: 3389
+          ToPort: 3389
+          CidrIp: 10.232.13.0/24
+          Description: Allows inbound from aviation-apps-prod RDP Gateway Service Servers
+        Tags:
+          - Key: Name
+            Value: base-windows-rdp-gateway
+          - Key: uai
+            Value: UAI3058170
