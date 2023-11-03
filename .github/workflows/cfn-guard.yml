@@ -1,3 +1,14 @@
-- name: 'guard-action'
-  uses: grolston/guard-action@1.0
-            
+name: sast
+
+on: [push]
+
+jobs:
+  ## Guard rule set FedRAMP-Moderate
+  sast-guard:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: grolston/guard-action@main
+      with:
+        data_directory: './cloudformation/' ## change to your template directory
+        rule_set: "FedRAMP-Moderate"
