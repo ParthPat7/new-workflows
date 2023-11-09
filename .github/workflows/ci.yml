@@ -30,6 +30,6 @@ jobs:
       - name: echo-changed-files
         id: echo-changed-files
         run: |
-          for file in ${{ steps.changed-files.outputs.all_changed_files }}; then
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             echo "$file has changed"
           done
